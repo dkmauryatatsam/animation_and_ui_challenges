@@ -4,26 +4,32 @@ import 'package:movie_rating_app/features/view_movies/domain/entities/movie_enti
 class MovieModel {
   String? title;
   String? overview;
+  String? poster_path;
+  double? vote_average;
 
   MovieModel(
     this.title,
     this.overview,
+    this.poster_path,
+    this.vote_average,
   );
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
-    return MovieModel(
-      json['title'],
-      json['overview'],
-    );
+    return MovieModel(json['title'], json['overview'], json['poster_path'],
+        json['vote_average']);
   }
 
   MovieEntity toDomain() {
     checkIfNull(title);
     checkIfNull(overview);
+    checkIfNull(poster_path);
+    checkIfNull(vote_average);
 
     return MovieEntity(
       title: title!,
       overview: overview!,
+      poster_path: poster_path!,
+      vote_average: vote_average!,
     );
   }
 
@@ -31,6 +37,8 @@ class MovieModel {
     return MovieModel(
       domain.title,
       domain.overview,
+      domain.poster_path,
+      domain.vote_average,
     );
   }
 }

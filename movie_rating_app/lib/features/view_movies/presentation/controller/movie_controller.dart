@@ -18,7 +18,6 @@ class MovieController extends GetxController {
   Future<void> fetchMovie() async {
     pageState(PageState.loading);
     final movieData = await getMovies();
-    log(movieData.toString());
     movieData.fold((l) => pageState(PageState.failed), (r) {
       movies.value = r;
       pageState(PageState.loaded);

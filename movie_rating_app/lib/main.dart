@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Movie Rating',
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBinding(),
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
+      theme: ThemeData(primarySwatch: Colors.deepOrange),
       home: const HomePage(),
     );
   }
