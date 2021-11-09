@@ -14,14 +14,13 @@ class MovieController extends GetxController {
   });
   RxList<MovieEntity> movies = RxList([]);
   var pageState = Rx<PageState>(PageState.initial);
-
+  RxList<MovieEntity> get listMovie => movies;
   Future<void> fetchMovie() async {
     pageState(PageState.loading);
     final movieData = await getMovies();
-
+    log(movieData.toString());
     movieData.fold((l) => pageState(PageState.failed), (r) {
       movies.value = r;
-      print(r.length.toString());
       pageState(PageState.loaded);
     });
   }

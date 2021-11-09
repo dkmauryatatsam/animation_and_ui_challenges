@@ -20,9 +20,9 @@ class HomePage extends GetView<MovieController> {
 
         case PageState.loaded:
           return ListView.builder(
-            itemCount: controller.movies.length,
+            itemCount: controller.listMovie.length,
             itemBuilder: (_, index) {
-              final movie = controller.movies[index];
+              final movie = controller.listMovie[index];
               return ListTile(
                 title: Text(movie.title),
               );

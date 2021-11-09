@@ -4,7 +4,7 @@ import 'package:movie_rating_app/features/view_movies/data/repositories/movie_re
 import 'package:movie_rating_app/features/view_movies/domain/repositories/movie_repository.dart';
 import 'package:movie_rating_app/features/view_movies/domain/usecases/get_movies.dart';
 import 'package:movie_rating_app/features/view_movies/presentation/controller/movie_controller.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class InitialBinding extends Bindings {
   @override
@@ -18,8 +18,8 @@ class InitialBinding extends Bindings {
             remoteDataSource: Get.find<MovieRemoteDataSource>()),
         fenix: false);
     Get.lazyPut<MovieRemoteDataSource>(
-        () => MovieRemoteDataSourceImpl(client: Get.find<http.Client>()),
+        () => MovieRemoteDataSourceImpl(dio: Get.find<Dio>()),
         fenix: false);
-    Get.lazyPut<http.Client>(() => http.Client(), fenix: false);
+    Get.lazyPut<Dio>(() => Dio(), fenix: false);
   }
 }

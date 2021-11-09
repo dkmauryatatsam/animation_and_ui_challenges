@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:math';
-
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:movie_rating_app/core/error/exception.dart';
-
 import 'package:movie_rating_app/features/view_movies/data/models/movie_model.dart';
 
 const String url =
@@ -14,18 +10,17 @@ abstract class MovieRemoteDataSource {
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  final http.Client client;
+  final Dio dio;
   MovieRemoteDataSourceImpl({
-    required this.client,
+    required this.dio,
   });
   @override
   Future<List<MovieModel>> getMovies() async {
     try {
-      final uri = Uri.parse(url);
-      final responce = await client.get(uri);
+      final responce = await dio.get(url);
+      final jsonResponce = responce.data['results'] as List;
 
-      final jsonResponce = jsonDecode(responce.body);
-      return jsonResponce['results']
+      return jsonResponce
           .map((movie) => MovieModel.fromJson(movie as Map<String, dynamic>))
           .toList();
     } catch (e) {

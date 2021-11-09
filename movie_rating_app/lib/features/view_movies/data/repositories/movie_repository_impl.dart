@@ -14,10 +14,9 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, List<MovieEntity>>> getMovies() async {
     try {
-      final movieData = await remoteDataSource.getMovies();
-      print(movieData);
-      final movies = movieData.map((movie) => movie.toDomain()).toList();
-      return right(movies);
+      final moviesData = await remoteDataSource.getMovies();
+      final movie = moviesData.map((movies) => movies.toDomain()).toList();
+      return right(movie);
     } on ServerException {
       return left(ServerFailure());
     } on DataToDomainConversionException {
