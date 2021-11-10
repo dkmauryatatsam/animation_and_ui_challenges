@@ -9,17 +9,19 @@ class _HeartState extends State<Heart> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<Color> _colorAnimation;
   Animation<double> _sizeAnimation;
+  Animation _curve;
   bool isFav = false;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(duration: Duration(milliseconds: 300), vsync: this);
-    _colorAnimation = ColorTween(begin: Colors.grey[400], end: Colors.red).animate(_controller);
+    _curve = CurvedAnimation(parent: _controller, curve: Curves.slowMiddle);
+    _colorAnimation = ColorTween(begin: Colors.grey[400], end: Colors.red).animate(_curve);
     _sizeAnimation = TweenSequence(<TweenSequenceItem<double>>[
       TweenSequenceItem(tween: Tween<double>(begin: 30, end: 50), weight: 50),
       TweenSequenceItem(tween: Tween<double>(begin: 50, end: 30), weight: 50),
-    ]).animate(_controller);
+    ]).animate(_curve);
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
