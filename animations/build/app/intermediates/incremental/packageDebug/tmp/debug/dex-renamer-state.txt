@@ -1,0 +1,4 @@
+#Fri Nov 12 13:50:15 IST 2021
+base.0=F\:\\animation_and_ui_challenges\\animations\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
